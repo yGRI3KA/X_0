@@ -1,57 +1,46 @@
-#include <iostream>
+#include<iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
-char h[9] = { '-', '-', '-', '-', '-', '-', '-', '-', '-' };
-void cleanboard()
-{
-	for (int i = 0; i < 50; i++)
-	{
-		cout << "\n";
-	}
-}
-void board1()
-{
-	cout << "\t\t\t***********" << endl;
-	cout << "\t\t\t-7-|-8-|-9-" << endl;
-	cout << "\t\t\t-4-|-5-|-6-" << endl;
-	cout << "\t\t\t-1-|-2-|-3-" << endl;
-	cout << "\t\t\t***********" << endl;
-}
-void board()
-{
-	cout << "\n";
-	cout << "\t\t\t***********" << endl;
-	cout << "\t\t\t-" << h[6] << "-|-" << h[7] << "-|-" << h[8] << "-" << endl;
-	cout << "\t\t\t-" << h[3] << "-|-" << h[4] << "-|-" << h[5] << "-" << endl;
-	cout << "\t\t\t-" << h[0] << "-|-" << h[1] << "-|-" << h[2] << "-" << endl;
-	cout << "\t\t\t***********" << endl;
-}
-int get_move()
-{
-	int move;
-	cin >> move;
-	while (move > 9 || move < 1 || h[move - 1] != '-')
-	{
-		cout << "ERROR!!!!" << endl;
-		cin >> move;
-	}
-	return move;
-}
-int main()
-{
-	board1();
-	for (int i = 0; i < 9; i++)
-	{
-		cleanboard();
-		board1();
-		board();
-		int move = get_move();
-		cout << "Hod: " << move << endl;
-		if (i % 2 == 0)
-		{
-			h[move - 1] = 'X';
-		}
-		else h[move - 1] = 'O';
-	}
 
-	return 0;
+int random(int min, int max)
+{
+	srand(time(NULL));
+	int num = min + rand() % (max - min + 1);
+	return num;
+}
+
+int main() {
+	int number;
+	int a;
+	string arr[9] = { "  " ,"  " ,"  " ,"  " ,"  " ,"  " ,"  ","  ","  " }; //массив, который будет заполн€тьс€ строчным типом данных (’ или ќ)  а потом выводитьс€. 
+	int arr1[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };// массив дублирующий предыдущий массив, но уже с целочисленным типом данных. (0 - пустые клетки, 1 - крестик, 2 - нолик) 
+
+	cout << "ѕривет, сыграем?)" << endl << endl;
+
+	cout << "\t1\t|\t2\t|\t3\t" << endl << "   -------------------" << endl <<
+		"\t4\t|\t5\t|\t6\t" << endl << "   -------------------" << endl <<
+		"\t7\t|\t8\t|\t9\t" << endl;
+
+	for (int i = 0; i < 7; i++) {
+		cout << "¬веди номер клетки: " << endl;
+
+		cout << "\t" << arr[0] << "\t|\t" << arr[1] << "\t|\t" << arr[2] << "\t" << endl << "   -------------------" << endl <<
+			"\t" << arr[3] << "\t|\t" << arr[4] << "\t|\t" << arr[5] << "\t" << endl << "   -------------------" << endl <<
+			"\t" << arr[6] << "\t|\t" << arr[7] << "\t|\t" << arr[8] <<
+			"\t" << endl;
+
+		cin >> a;
+		arr[a - 1] = "X";//массив дл€ чтени€ пользователем
+		arr1[a - 1] = 1;// массив дл€ чтени€ программой
+
+		random();
+		number = random(0, 8);
+
+		for (int i = 0; i < 9; i++) {
+			arr[number] = "O";// что б пользователь видел ход
+			arr1[number] = 2;//заполнение клетки случайно сгенерированным индексом 
+
+		}
+	}
 }
